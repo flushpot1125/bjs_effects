@@ -1,0 +1,26 @@
+{
+  "name": "bjs_effects",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flushpot1125/bjs_effects.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/flushpot1125/bjs_effects/issues"
+  },
+  "homepage": "https://github.com/flushpot1125/bjs_effects#readme",
+  "devDependencies": {
+    "@babylonjs/core": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
