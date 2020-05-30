@@ -12,6 +12,8 @@ module.exports = {
         filename: 'main.js',
         path: outputPath
     },
+    devtool: 'inline-source-map',//ブラウザでのデバッグ用にソースマップを出力する
+
     // webpack-dev-serverを立ち上げた時のドキュメントルートを設定
     // 
     devServer: {
