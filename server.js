@@ -1,0 +1,7 @@
+'use strict';
+const express = require('express');
+const app = express();
+app.use(express.static('./'));
+app.listen(8002, ()=> {
+  console.log('http://localhost:8002');
+});
