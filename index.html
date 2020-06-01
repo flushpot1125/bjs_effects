@@ -1,34 +1,99 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-    <title>Local Development</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+    <title>Effect sample</title>
+
+    <!-- Babylon.js -->
     <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+    <script src="https://preview.babylonjs.com/ammo.js"></script>
+    <script src="https://preview.babylonjs.com/cannon.js"></script>
+    <script src="https://preview.babylonjs.com/Oimo.js"></script>
+    <script src="https://preview.babylonjs.com/libktx.js"></script>
+    <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+    <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+    <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+    <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+    <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+    <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
 
     <style>
-        html,
-        body {
+        html, body {
+            overflow: hidden;
             width: 100%;
             height: 100%;
-            padding: 0;
             margin: 0;
-            overflow: hidden;
+            padding: 0;
         }
 
         #renderCanvas {
             width: 100%;
             height: 100%;
-            display: block;
-            font-size: 0;
+            touch-action: none;
         }
     </style>
 </head>
-
 <body>
     <canvas id="renderCanvas" touch-action="none"></canvas>
 
-    <script src="main.js"></script>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
+
+        var engine = null;
+        var scene = null;
+        var sceneToRender = null;
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
+        var createScene = function () {
+         
+            var scene = new BABYLON.Scene(engine);
+            scene.debugLayer.show();
+        
+            var light0 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(0, 2, 8), scene);
+            var camera = new BABYLON.ArcRotateCamera("ArcRotateCamera", 1, 0.8, 20, new BABYLON.Vector3(
+                0, 0, 0), scene);
+            camera.attachControl(canvas, true);
+        
+            // Fountain object
+            var fountain = BABYLON.Mesh.CreateBox("foutain", 0.1, scene);
+/*
+       var particleData = {"name":"particles","id":"particles","capacity":2000,"emitterId":"foutain","particleEmitterType":{"type":"BoxParticleEmitter","direction1":[-7,8,3],"direction2":[7,8,-3],"minEmitBox":[-1,0,0],"maxEmitBox":[1,0,0]},"texture":{"tags":null,"url":"textures/flare.png","uOffset":0,"vOffset":0,"uScale":1,"vScale":1,"uAng":0,"vAng":0,"wAng":0,"uRotationCenter":0.5,"vRotationCenter":0.5,"wRotationCenter":0.5,"isBlocking":true,"uniqueId":9,"name":"textures/flare.png","hasAlpha":false,"getAlphaFromRGB":false,"level":1,"coordinatesIndex":0,"coordinatesMode":0,"wrapU":1,"wrapV":1,"wrapR":1,"anisotropicFilteringLevel":4,"isCube":false,"is3D":false,"is2DArray":false,"gammaSpace":true,"invertZ":false,"lodLevelInAlpha":false,"lodGenerationOffset":0,"lodGenerationScale":0,"linearSpecularLOD":false,"isRenderTarget":false,"animations":[],"invertY":true,"samplingMode":3},"isLocal":false,"animations":[],"beginAnimationOnStart":false,"beginAnimationFrom":0,"beginAnimationTo":60,"beginAnimationLoop":false,"startDelay":0,"renderingGroupId":0,"isBillboardBased":true,"billboardMode":7,"minAngularSpeed":0,"maxAngularSpeed":3.141592653589793,"minSize":0.1,"maxSize":0.5,"minScaleX":1,"maxScaleX":1,"minScaleY":1,"maxScaleY":1,"minEmitPower":1,"maxEmitPower":3,"minLifeTime":0.3,"maxLifeTime":1.5,"emitRate":1500,"gravity":[0,-9.81,0],"noiseStrength":[10,10,10],"color1":[0.7,0.8,1,1],"color2":[0.2,0.5,1,1],"colorDead":[0,0,0.2,0],"updateSpeed":0.005,"targetStopDuration":0,"blendMode":0,"preWarmCycles":0,"preWarmStepOffset":1,"minInitialRotation":0,"maxInitialRotation":0,"startSpriteCellID":0,"endSpriteCellID":0,"spriteCellChangeSpeed":1,"spriteCellWidth":0,"spriteCellHeight":0,"spriteRandomStartCell":false,"isAnimationSheetEnabled":false,"textureMask":[1,1,1,1],"customShader":null,"preventAutoStart":false};
+        var birthdaySystem = BABYLON.ParticleSystem.Parse(particleData, scene, "");
+    var particleSource = new BABYLON.AbstractMesh("particleSource", scene);
+    particleSource.position = new BABYLON.Vector3(0, 0, 0);
+    birthdaySystem.emitter = particleSource;
+    birthdaySystem.start();  //birthdaySystem.stop()にすればとまる。
+    */
+            return scene;
+        
+        };
+var engine;
+try {
+    engine = createDefaultEngine();
+} catch(e) {
+    console.log("the available createEngine function failed. Creating the default engine instead");
+    engine = createDefaultEngine();
+}
+        if (!engine) throw 'engine should not be null.';
+        scene = createScene();;
+        sceneToRender = scene
+
+        engine.runRenderLoop(function () {
+            if (sceneToRender) {
+                sceneToRender.render();
+            }
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
 </body>
 
 </html>
