@@ -2,6 +2,8 @@ import { Engine } from "@babylonjs/core/Engines/engine";
 import { Scene } from "@babylonjs/core/scene";
 import { DebugLayer } from '@babylonjs/core/Debug/debugLayer';
 import { Vector3 } from "@babylonjs/core/Maths/math";
+import { Vector2} from "@babylonjs/core/Maths/math";
+
 import {Color3} from "@babylonjs/core/Maths/math.color";
 import { FreeCamera } from "@babylonjs/core/Cameras/freeCamera";
 import { WaterMaterial} from "@babylonjs/materials/water/waterMaterial";
@@ -77,14 +79,14 @@ var water = new WaterMaterial("water", scene);
 water.bumpTexture = new Texture("textures/waterbump.png", scene);
 water.windForce = -15;
 water.waveHeight = 1.3;
-water.windDirection = new BABYLON.Vector2(1, 1);
-water.waterColor = new BABYLON.Color3(0.1, 0.1, 0.6);
+water.windDirection = new Vector2(1, 1);
+water.waterColor = new Color3(0.1, 0.1, 0.6);
 water.colorBlendFactor = 0.3;
 water.bumpHeight = 0.1;
 water.waveLength = 0.1;
 // Affect a material
-//ground.material = material;
-ground.material = water;
+ground.material = material;
+//ground.material = water;
 
 //var systemJson = { "name": "particles", "id": "particles", "capacity": 2000, "emitterId": "foutain", "particleEmitterType": { "type": "BoxParticleEmitter", "direction1": [-7, 8, 3], "direction2": [7, 8, -3], "minEmitBox": [-1, 0, 0], "maxEmitBox": [1, 0, 0] }, "texture": { "tags": null, "url": "../Assets/textures/flare.png", "uOffset": 0, "vOffset": 0, "uScale": 1, "vScale": 1, "uAng": 0, "vAng": 0, "wAng": 0, "uRotationCenter": 0.5, "vRotationCenter": 0.5, "wRotationCenter": 0.5, "isBlocking": true, "uniqueId": 9, "name": "textures/flare.png", "hasAlpha": false, "getAlphaFromRGB": false, "level": 1, "coordinatesIndex": 0, "coordinatesMode": 0, "wrapU": 1, "wrapV": 1, "wrapR": 1, "anisotropicFilteringLevel": 4, "isCube": false, "is3D": false, "is2DArray": false, "gammaSpace": true, "invertZ": false, "lodLevelInAlpha": false, "lodGenerationOffset": 0, "lodGenerationScale": 0, "linearSpecularLOD": false, "isRenderTarget": false, "animations": [], "invertY": true, "samplingMode": 3 }, "isLocal": false, "animations": [], "beginAnimationOnStart": false, "beginAnimationFrom": 0, "beginAnimationTo": 60, "beginAnimationLoop": false, "startDelay": 0, "renderingGroupId": 0, "isBillboardBased": true, "billboardMode": 7, "minAngularSpeed": 0, "maxAngularSpeed": 3.141592653589793, "minSize": 0.1, "maxSize": 0.5, "minScaleX": 1, "maxScaleX": 1, "minScaleY": 1, "maxScaleY": 1, "minEmitPower": 1, "maxEmitPower": 3, "minLifeTime": 0.3, "maxLifeTime": 1.5, "emitRate": 1500, "gravity": [2, -9.81, 1], "noiseStrength": [10, 10, 10], "color1": [0.7, 0.8, 1, 1], "color2": [0.2, 0.5, 1, 1], "colorDead": [0, 0, 0.2, 0], "updateSpeed": 0.005, "targetStopDuration": 0, "blendMode": 0, "preWarmCycles": 0, "preWarmStepOffset": 1, "minInitialRotation": 0, "maxInitialRotation": 0, "startSpriteCellID": 0, "endSpriteCellID": 0, "spriteCellChangeSpeed": 1, "spriteCellWidth": 0, "spriteCellHeight": 0, "spriteRandomStartCell": false, "isAnimationSheetEnabled": false, "textureMask": [1, 1, 1, 1], "customShader": null, "preventAutoStart": false };
 //shiny rain effect
