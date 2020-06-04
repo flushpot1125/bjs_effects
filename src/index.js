@@ -85,7 +85,13 @@ var lineParticleySystem = ParticleSystem.Parse(lineParticle,scene,"");
 var lineParticleSource = new AbstractMesh("particleSource", scene);
 lineParticleSource.position = new Vector3(0,0,0);
 lineParticleySystem.emitter = lineParticleSource;
-lineParticleySystem.start();
+//lineParticleySystem.beginAnimationOnStart=false;
+lineParticleySystem.beginAnimationLoop =false;
+//lineParticleySystem.start();//なくても動く
+
+lineParticleySystem.onAnimationEnd= function(){
+    console.log("line particle ended!");
+}
 
 
 //shiny rain
