@@ -32,28 +32,10 @@ var scene = new Scene(engine);
 
 scene.debugLayer.show();
 
-//これを入れたが特に変化なし
-/*
-var environment = scene.createDefaultEnvironment({
-    skyboxSize: 300
-});
-environment.setMainColor(new Color3(0.05, 0.05, 0.05));
-*/
-
-//var config = {embedMode: true};
-//var debugLayer = new DebugLayer();
-//DebugLayer.show();
-
-// This creates and positions a free camera (non-mesh)
-//var camera = new FreeCamera("camera1", new Vector3(0, 5, -10), scene);
-// This targets the camera to scene origin
-//camera.setTarget(Vector3.Zero());
-//var camera = new ArcRotateCamera("ArcRotateCamera", 1, 0.8, 20, new Vector3(
-//    0, 0, 0), scene);
 var camera = new ArcRotateCamera("Camera", -Math.PI / 2, Math.PI / 2, 12, Vector3.Zero(), scene);
-	
-camera.radius=1.0;
-
+		
+//camera.radius=1.0;
+camera.radius=10.0;
 // This attaches the camera to the canvas
 camera.attachControl(canvas, true);
 
@@ -63,30 +45,13 @@ var light = new HemisphericLight("light1", new Vector3(0, 1, 0), scene);
 // Default intensity is 1. Let's dim the light a small amount
 light.intensity = 0.7;
 
-// Create a grid material
-//var material = new GridMaterial("grid", scene);
-
-// Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-//var sphere = Mesh.CreateSphere("sphere1", 16, 2, scene);
-
-// Move the sphere upward 1/2 its height
-//sphere.position.y = 2;
-
-// Affect a material
-//sphere.material = material;
-
-// Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-//var ground = Mesh.CreateGround("ground1", 6, 6, 2, scene);
-
-// Affect a material
-//ground.material = material;
-//ground.material = water;
 
 //
 var fireworksParticle ={"name":"CPU particle system","id":"default system","capacity":10000,"emitter":[0,0,0],"particleEmitterType":{"type":"BoxParticleEmitter","direction1":[-3,8,3],"direction2":[3,8,-3],"minEmitBox":[-0.3,0,0],"maxEmitBox":[0.3,0,0]},"texture":{"tags":null,"url":"https://www.babylonjs.com/assets/Flare.png","uOffset":0,"vOffset":0,"uScale":1,"vScale":1,"uAng":0,"vAng":0,"wAng":0,"uRotationCenter":0.5,"vRotationCenter":0.5,"wRotationCenter":0.5,"isBlocking":true,"uniqueId":11,"name":"https://www.babylonjs.com/assets/Flare.png","hasAlpha":false,"getAlphaFromRGB":false,"level":1,"coordinatesIndex":0,"coordinatesMode":0,"wrapU":1,"wrapV":1,"wrapR":1,"anisotropicFilteringLevel":4,"isCube":false,"is3D":false,"is2DArray":false,"gammaSpace":true,"invertZ":false,"lodLevelInAlpha":false,"lodGenerationOffset":0,"lodGenerationScale":0,"linearSpecularLOD":false,"isRenderTarget":false,"animations":[],"invertY":true,"samplingMode":3},"isLocal":false,"animations":[],"beginAnimationOnStart":false,"beginAnimationFrom":0,"beginAnimationTo":60,"beginAnimationLoop":false,"startDelay":0,"renderingGroupId":0,"isBillboardBased":true,"billboardMode":7,"minAngularSpeed":0,"maxAngularSpeed":3.14,"minSize":0.1,"maxSize":0.5,"minScaleX":1,"maxScaleX":1,"minScaleY":1,"maxScaleY":1,"minEmitPower":0.5,"maxEmitPower":0.75,"minLifeTime":0.1,"maxLifeTime":3.5,"emitRate":30,"gravity":[0,-9,0],"noiseStrength":[10,10,10],"color1":[1,1,1,1],"color2":[1,1,1,1],"colorDead":[1,1,1,0],"updateSpeed":0.005,"targetStopDuration":0,"blendMode":0,"preWarmCycles":0,"preWarmStepOffset":1,"minInitialRotation":0,"maxInitialRotation":0,"startSpriteCellID":0,"endSpriteCellID":0,"spriteCellChangeSpeed":1,"spriteCellWidth":0,"spriteCellHeight":0,"spriteRandomStartCell":false,"isAnimationSheetEnabled":false,"textureMask":[1,1,1,1],"customShader":null,"preventAutoStart":false};
 var fireworksParticleSystem = new ParticleSystem.Parse(fireworksParticle,scene,"",true);
 var fireworksParticleSource = new AbstractMesh("fireworksParticleSource", scene);
-fireworksParticleSource.position = new Vector3(0,10,0);
+fireworksParticleSource.position = new Vector3(0,3,0);
+fireworksParticleSystem.emitter = fireworksParticleSource;
 fireworksParticleSystem.beginAnimationOnStart=false;
 fireworksParticleSystem.beginAnimationLoop=false;
 fireworksParticleSystem.targetStopDuration=1;
@@ -94,15 +59,6 @@ fireworksParticleSystem.targetStopDuration=1;
 fireworksParticleSystem.onAnimationEnd = function(){
     console.log("fireworks particle ended!");
 };
-
-//works (without gradient pattern1)
-//var lineParticle ={"name":"CPU particle system","id":"default system","capacity":10000,"emitter":[0,0,0],"particleEmitterType":{"type":"BoxParticleEmitter","direction1":[-3,8,3],"direction2":[3,8,-3],"minEmitBox":[-0.3,0,0],"maxEmitBox":[0.3,0,0]},"texture":{"tags":null,"url":"https://www.babylonjs.com/assets/Flare.png","uOffset":0,"vOffset":0,"uScale":1,"vScale":1,"uAng":0,"vAng":0,"wAng":0,"uRotationCenter":0.5,"vRotationCenter":0.5,"wRotationCenter":0.5,"isBlocking":true,"uniqueId":11,"name":"https://www.babylonjs.com/assets/Flare.png","hasAlpha":false,"getAlphaFromRGB":false,"level":1,"coordinatesIndex":0,"coordinatesMode":0,"wrapU":1,"wrapV":1,"wrapR":1,"anisotropicFilteringLevel":4,"isCube":false,"is3D":false,"is2DArray":false,"gammaSpace":true,"invertZ":false,"lodLevelInAlpha":false,"lodGenerationOffset":0,"lodGenerationScale":0,"linearSpecularLOD":false,"isRenderTarget":false,"animations":[],"invertY":true,"samplingMode":3},"isLocal":false,"animations":[],"beginAnimationOnStart":false,"beginAnimationFrom":0,"beginAnimationTo":60,"beginAnimationLoop":false,"startDelay":0,"renderingGroupId":0,"isBillboardBased":true,"billboardMode":7,"minAngularSpeed":0,"maxAngularSpeed":3.14,"minSize":0.1,"maxSize":0.5,"minScaleX":1,"maxScaleX":1,"minScaleY":1,"maxScaleY":1,"minEmitPower":0.5,"maxEmitPower":0.75,"minLifeTime":0.1,"maxLifeTime":3.5,"emitRate":30,"gravity":[0,-9,0],"noiseStrength":[10,10,10],"color1":[1,1,1,1],"color2":[1,1,1,1],"colorDead":[1,1,1,0],"updateSpeed":0.005,"targetStopDuration":0,"blendMode":0,"preWarmCycles":0,"preWarmStepOffset":1,"minInitialRotation":0,"maxInitialRotation":0,"startSpriteCellID":0,"endSpriteCellID":0,"spriteCellChangeSpeed":1,"spriteCellWidth":0,"spriteCellHeight":0,"spriteRandomStartCell":false,"isAnimationSheetEnabled":false,"textureMask":[1,1,1,1],"customShader":null,"preventAutoStart":false};
-
-//works (without gradient pattern2)
-//var lineParticle={"name":"CPU particle system","id":"default system","capacity":10000,"emitter":[0,0,0],"particleEmitterType":{"type":"PointParticleEmitter","direction1":[0,1,0],"direction2":[0,1,0]},"texture":{"tags":null,"url":"https://www.babylonjs.com/assets/Flare.png","uOffset":0,"vOffset":0,"uScale":1,"vScale":1,"uAng":0,"vAng":0,"wAng":0,"uRotationCenter":0.5,"vRotationCenter":0.5,"wRotationCenter":0.5,"isBlocking":true,"uniqueId":14,"name":"https://www.babylonjs.com/assets/Flare.png","hasAlpha":false,"getAlphaFromRGB":false,"level":1,"coordinatesIndex":0,"coordinatesMode":0,"wrapU":1,"wrapV":1,"wrapR":1,"anisotropicFilteringLevel":4,"isCube":false,"is3D":false,"is2DArray":false,"gammaSpace":true,"invertZ":false,"lodLevelInAlpha":false,"lodGenerationOffset":0,"lodGenerationScale":0,"linearSpecularLOD":false,"isRenderTarget":false,"animations":[],"invertY":true,"samplingMode":3},"isLocal":false,"animations":[],"beginAnimationOnStart":false,"beginAnimationFrom":0,"beginAnimationTo":60,"beginAnimationLoop":false,"startDelay":0,"renderingGroupId":0,"isBillboardBased":true,"billboardMode":7,"minAngularSpeed":0,"maxAngularSpeed":0,"minSize":0.1,"maxSize":0.1,"minScaleX":1,"maxScaleX":1,"minScaleY":1,"maxScaleY":1,"minEmitPower":5,"maxEmitPower":5,"minLifeTime":0.99,"maxLifeTime":1,"emitRate":30,"gravity":[0,0,0],"noiseStrength":[10,10,10],"color1":[1,1,1,1],"color2":[1,1,1,1],"colorDead":[1,1,1,0],"updateSpeed":0.016666666666666666,"targetStopDuration":0,"blendMode":0,"preWarmCycles":0,"preWarmStepOffset":1,"minInitialRotation":0,"maxInitialRotation":0,"startSpriteCellID":0,"endSpriteCellID":0,"spriteCellChangeSpeed":1,"spriteCellWidth":0,"spriteCellHeight":0,"spriteRandomStartCell":false,"isAnimationSheetEnabled":false,"textureMask":[1,1,1,1],"customShader":null,"preventAutoStart":false};
-
-
-
 
 var lineParticle={"name":"CPU particle system","id":"default system","capacity":10000,"emitter":[0,0,0],"particleEmitterType":{"type":"PointParticleEmitter","direction1":[0,1,0],"direction2":[0,1,0]},"texture":{"tags":null,"url":"https://www.babylonjs.com/assets/Flare.png","uOffset":0,"vOffset":0,"uScale":1,"vScale":1,"uAng":0,"vAng":0,"wAng":0,"uRotationCenter":0.5,"vRotationCenter":0.5,"wRotationCenter":0.5,"isBlocking":true,"uniqueId":14,"name":"https://www.babylonjs.com/assets/Flare.png","hasAlpha":false,"getAlphaFromRGB":false,"level":1,"coordinatesIndex":0,"coordinatesMode":0,"wrapU":1,"wrapV":1,"wrapR":1,"anisotropicFilteringLevel":4,"isCube":false,"is3D":false,"is2DArray":false,"gammaSpace":true,"invertZ":false,"lodLevelInAlpha":false,"lodGenerationOffset":0,"lodGenerationScale":0,"linearSpecularLOD":false,"isRenderTarget":false,"animations":[],"invertY":true,"samplingMode":3},"isLocal":false,"animations":[],"beginAnimationOnStart":false,"beginAnimationFrom":0,"beginAnimationTo":60,"beginAnimationLoop":false,"startDelay":0,"renderingGroupId":0,"isBillboardBased":true,"billboardMode":7,"minAngularSpeed":0,"maxAngularSpeed":0,"minSize":0.1,"maxSize":0.1,"minScaleX":1,"maxScaleX":1,"minScaleY":1,"maxScaleY":1,"minEmitPower":5,"maxEmitPower":5,"minLifeTime":0.99,"maxLifeTime":1,"emitRate":30,"gravity":[0,0,0],"noiseStrength":[10,10,10],"color1":[1,1,1,1],"color2":[1,1,1,1],"colorDead":[1,1,1,0],"updateSpeed":0.016666666666666666,"targetStopDuration":0,"blendMode":0,"preWarmCycles":0,"preWarmStepOffset":1,"minInitialRotation":0,"maxInitialRotation":0,"startSpriteCellID":0,"endSpriteCellID":0,"spriteCellChangeSpeed":1,"spriteCellWidth":0,"spriteCellHeight":0,"spriteRandomStartCell":false,"isAnimationSheetEnabled":false,"sizeGradients":[{"gradient":0,"factor1":0.1,"factor2":0},{"gradient":1,"factor1":0.6,"factor2":0.7}],"lifeTimeGradients":[{"gradient":0,"factor1":0.6,"factor2":0.6},{"gradient":1,"factor1":0.7,"factor2":0.7}],"textureMask":[1,1,1,1],"customShader":null,"preventAutoStart":false};
 
@@ -113,9 +69,6 @@ lineParticleSource.position = new Vector3(0,0,0);
 lineParticleySystem.beginAnimationOnStart=false;
 lineParticleySystem.beginAnimationLoop =false;
 lineParticleySystem.targetStopDuration=1;
-//lineParticleySystem.addLifeTimeGradient(0,0.1);
-//lineParticleySystem.addLifeTimeGradient(1,0.6);
-
 lineParticleySystem.emitter = lineParticleSource;
 lineParticleySystem.start();
 
